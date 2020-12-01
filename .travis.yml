@@ -1,11 +1,18 @@
 sudo: required
+dist: focal
 
 services:
 - docker
 
+before_install:
+- curl --silent -L "https://github.com/docker/buildx/releases/download/v0.4.2/buildx-v0.4.2.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
+- chmod a+x ~/.docker/cli-plugins/docker-buildx
+- docker buildx version
+
 script:
 - >
-- docker build -t wise2c/kubeadm-version:$TRAVIS_BRANCH .
+- docker buildx create --use --name mybuild
+- docker buildx build --platform linux/amd64,linux/arm64 -t wise2c/kubeadm-version:$TRAVIS_BRANCH .
 - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 - docker push wise2c/kubeadm-version:$TRAVIS_BRANCH
 - docker run --rm --name=kubeadm-version wise2c/kubeadm-version:$TRAVIS_BRANCH kubeadm config images list
