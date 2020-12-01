@@ -6,5 +6,5 @@ RUN if [ `uname -m` = "aarch64" ] ; then \
        cp kubernetes.repo /etc/yum.repos.d; \
        echo "Hello"; \
     fi
-COPY kubernetes.repo /etc/yum.repos.d
+#COPY kubernetes.repo /etc/yum.repos.d
 RUN yum -y install kubeadm-1.19.4
