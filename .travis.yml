@@ -17,6 +17,6 @@ script:
 - docker buildx create --use --name test > /dev/null
 - docker buildx ls
 - docker buildx build --platform linux/amd64,linux/arm64 -t wise2c/kubeadm-version:$TRAVIS_BRANCH .
-- docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-- docker push wise2c/kubeadm-version:$TRAVIS_BRANCH
-- docker run --rm --name=kubeadm-version wise2c/kubeadm-version:$TRAVIS_BRANCH kubeadm config images list
+#- docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+#- docker push wise2c/kubeadm-version:$TRAVIS_BRANCH
+#- docker run --rm --name=kubeadm-version wise2c/kubeadm-version:$TRAVIS_BRANCH kubeadm config images list
