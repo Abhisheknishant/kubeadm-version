@@ -17,6 +17,6 @@ script:
 - docker buildx create --use --name test > /dev/null
 - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 #- travis_wait 40 docker buildx build --push --platform linux/amd64,linux/arm64 -t ab1997/kubeadm-version:$TRAVIS_BRANCH . >/dev/null 2> /dev/null
-- docker buildx build --push --platform linux/amd64,linux/arm64 -t ab1997/kubeadm-version:$TRAVIS_BRANCH . > null 2> /dev/null
+- travis_wait 40 docker buildx build --push --platform linux/amd64,linux/arm64 -t ab1997/kubeadm-version:$TRAVIS_BRANCH . > null 2> /dev/null
 #- docker push ab1997/kubeadm-version:$TRAVIS_BRANCH
 - docker run --rm --name=kubeadm-version ab1997/kubeadm-version:$TRAVIS_BRANCH kubeadm config images list
